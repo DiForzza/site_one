@@ -22,13 +22,13 @@
 				<div class="collapse navbar-collapse" id="navbarCollapse">
 					<ul class="navbar-nav me-auto mb-2 mb-md-0">
 						<li class="nav-item">
-							<a class="nav-link active" aria-current="page" href="{% url 'main:home' %}">Home</a>
+							<a class="nav-link active" aria-current="page" href="{% url 'main:home' %}">Главная</a>
 						</li>
 						<li class="nav-item">
-							<a class="nav-link" href="{% url 'main:about' %}" >About</a>
+							<a class="nav-link" href="{% url 'main:about' %}" >О нас</a>
 						</li>
 						<li class="nav-item">
-							<a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
+							<a class="nav-link" href="{% url 'main:authorization' %}" tabindex="-1" aria-disabled="true">Вход</a>
 						</li>
 					</ul>
 				</div>
@@ -64,6 +64,7 @@
 				<span class="sr-only">Next</span>
 			</a>
 		</div>
+		{% block auth %}{% endblock %}
 	</div>
 </div>
 	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"

@@ -2,11 +2,19 @@ from django.shortcuts import render
 import requests
 
 
-def index(request):
+def weather():
     url = 'http://wttr.in/Ekaterinburg?0T'
     response = requests.get(url, params={'format': 2, 'M': ''})
-    return render(request, 'main/main.html', {'response': response.text})
+    return response.text
+
+
+def index(request):
+    return render(request, 'main/main.html', {'response': weather()})
 
 
 def about(request):
-    return render(request, 'main/about.html')
+    return render(request, 'main/about.html', {'response': weather()})
+
+
+def authorization(request):
+    return render(request, 'main/authorization.html', {'response': weather()})
