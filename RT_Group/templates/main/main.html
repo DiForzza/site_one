@@ -4,6 +4,12 @@
 Главная страница
 {% endblock %}
 
-{% block content %}
-{{ response }}
+{% block tasks %}
+    <h1 align="center">Новости</h1>
+    {% for i in tasks %}
+        <div class="alert alert-warning mt-2">
+            <h3>{{ i.title }}</h3>
+            <p>{{ i.task }}</p>
+        </div>
+    {% endfor %}
 {% endblock %}

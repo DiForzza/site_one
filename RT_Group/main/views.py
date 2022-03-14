@@ -1,6 +1,6 @@
 from django.shortcuts import render
 import requests
-
+from .models import Task
 
 def weather():
     url = 'http://wttr.in/Ekaterinburg?0T'
@@ -9,7 +9,8 @@ def weather():
 
 
 def index(request):
-    return render(request, 'main/main.html', {'response': weather()})
+    tasks = Task.objects.all()
+    return render(request, 'main/main.html', {'response': weather(), 'tasks': tasks})
 
 
 def about(request):
