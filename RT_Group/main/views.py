@@ -9,7 +9,7 @@ def weather():
 
 
 def index(request):
-    tasks = Task.objects.all()
+    tasks = Task.objects.order_by('-id')[:2]
     return render(request, 'main/main.html', {'response': weather(), 'tasks': tasks})
 
 
