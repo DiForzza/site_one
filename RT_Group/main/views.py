@@ -1,6 +1,13 @@
 from django.shortcuts import render
 import requests
 from .models import Task
+from django.urls import resolve
+
+
+def setup(request):
+    current_url = resolve(request.path_info).url_name
+    return current_url
+
 
 def weather():
     url = 'http://wttr.in/Ekaterinburg?0T'
@@ -10,7 +17,7 @@ def weather():
 
 def index(request):
     tasks = Task.objects.order_by('-id')[:2]
-    return render(request, 'main/main.html', {'response': weather(), 'tasks': tasks})
+    return render(request, 'main/main.html', {'response': weather(), 'tasks': tasks, 'current_url': setup(request)})
 
 
 def about(request):
