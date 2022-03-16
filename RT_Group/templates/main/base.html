@@ -28,13 +28,22 @@
 						<li class="nav-item">
 							<a class="nav-link {% if url_name == 'about' %}active{% endif %}" href="{% url 'main:about' %}" >О нас</a>
 						</li>
-						<li class="nav-item">
-							<a class="nav-link {% if url_name == 'authorization' %}active{% endif %}" href="{% url 'main:authorization' %}" tabindex="-1" aria-disabled="true">Вход</a>
-						</li>
+<!--						<li class="nav-item">-->
+<!--							<a class="nav-link {% if url_name == 'authorization' %}active{% endif %}" href="{% url 'main:authorization' %}" tabindex="-1" aria-disabled="true">Вход</a>-->
+<!--						</li>-->
 						{% endwith %}
 					</ul>
 				</div>
-				<h6 align="center" style="color:White">{{response}}</h6>
+				<h7 align="right" style="color:White">
+				{% if user.is_authenticated %}
+					{{ user.get_full_name }}
+					<a href="{% url 'main:logout'%}?next={{request.path}}">Logout</a>
+				{% else %}
+					<a href="{% url 'main:login'%}?next={{request.path}}">Login</a>
+				{% endif %}
+				<br>
+				{{response}}
+				</h7>
 			</div>
 		</nav>
 	</div>
@@ -66,6 +75,7 @@
 				<span class="sr-only">Next</span>
 			</a>
 		</div>
+		<h1></h1>
 		{% block auth %}{% endblock %}
 		{% block tasks %}{% endblock %}
 		{% block map %}{% endblock %}

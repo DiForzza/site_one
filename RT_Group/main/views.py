@@ -25,4 +25,4 @@ def about(request):
 
 
 def authorization(request):
-    return render(request, 'main/authorization.html', {'response': weather()})
+    return render(request, 'registration/login.html', {'response': weather()})
