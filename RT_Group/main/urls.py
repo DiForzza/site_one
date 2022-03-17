@@ -8,5 +8,6 @@ urlpatterns = [
     path('', views.index, name="home"),
     path('about', views.about, name="about"),
     path('authorization', views.authorization, name="authorization"),
+    path('add_news', views.add_news, name="add_news"),
     path('accounts/', include('django.contrib.auth.urls')),
 ]

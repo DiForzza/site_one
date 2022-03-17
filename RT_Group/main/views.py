@@ -1,6 +1,7 @@
 from django.shortcuts import render
 import requests
 from .models import Task
+from .forms import TaskForm
 from django.urls import resolve
 
 
@@ -26,3 +27,11 @@ def about(request):
 
 def authorization(request):
     return render(request, 'registration/login.html', {'response': weather()})
+
+
+def add_news(request):
+    form = TaskForm()
+    context = {
+        'form': form
+    }
+    return render(request, 'main/add_news.html', {'response': weather()}, context)

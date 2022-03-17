@@ -16,6 +16,7 @@
 	<div>
 		<nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
 			<div class="container-fluid">
+
 				<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
 					<span class="navbar-toggler-icon"></span>
 				</button>
@@ -33,7 +34,11 @@
 <!--						</li>-->
 						{% endwith %}
 					</ul>
+					{% if user.is_authenticated %}
+						<a href="{% url 'main:add_news'%}?next={{request.path}}">Добавить новость</a>
+					{% endif %}
 				</div>
+
 				<h7 align="right" style="color:White">
 				{% if user.is_authenticated %}
 					{{ user.get_full_name }}
