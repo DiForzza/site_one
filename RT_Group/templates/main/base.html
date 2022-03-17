@@ -38,17 +38,16 @@
 						<a href="{% url 'main:add_news'%}?next={{request.path}}">Добавить новость</a>
 					{% endif %}
 				</div>
-
-				<h7 align="right" style="color:White">
+				<h6 align="right" style="color:White">
 				{% if user.is_authenticated %}
 					{{ user.get_full_name }}
-					<a href="{% url 'main:logout'%}?next={{request.path}}">Logout</a>
+					<a href="{% url 'main:logout'%}">Logout</a>
 				{% else %}
-					<a href="{% url 'main:login'%}?next={{request.path}}">Login</a>
+					<a href="{% url 'main:login'%}">Login</a>
 				{% endif %}
 				<br>
 				{{response}}
-				</h7>
+				</h6>
 			</div>
 		</nav>
 	</div>

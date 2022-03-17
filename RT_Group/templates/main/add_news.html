@@ -1,10 +1,10 @@
-{% extends 'main/base.html' %} &nbsp;
+{% extends 'main/base.html' %}
 
 {% block title %}
 Страница про нас
 {% endblock %}
 
-{% block auth %}
+{% block map %}
     <h1>ADD NEWS</h1>
     <form method="post">
         {% csrf_token %}
@@ -12,4 +12,5 @@
         {{ form.task }}<br>
         <button type="submit" class="btn btn-success">Добавить</button>
     </form>
+    <h1> text {{user}} </h1>
 {% endblock %}

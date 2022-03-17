@@ -3,6 +3,7 @@ import requests
 from .models import Task
 from .forms import TaskForm
 from django.urls import resolve
+from django.contrib.auth.models import User
 
 
 def setup(request):
@@ -30,8 +31,15 @@ def authorization(request):
 
 
 def add_news(request):
+    if request.method == 'POST':
+        form = TaskForm(request.POST)
+        if form.is_valid():
+            form.save()
+
     form = TaskForm()
     context = {
-        'form': form
+        'form': form,
+        'response': weather(),
+        'user': User.get_full_name
     }
-    return render(request, 'main/add_news.html', {'response': weather()}, context)
+    return render(request, 'main/add_news.html', context)
