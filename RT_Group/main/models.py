@@ -11,3 +11,11 @@ class Task(models.Model):
     class Meta:
         verbose_name = 'Задача'
         verbose_name_plural = 'Задачи'
+
+
+class UserLoginForm(models.Model):
+    email = models.EmailField(max_length = 100)
+    password = models.CharField(max_length = 100)
+
+    def __unicode__(self):
+        return self.email

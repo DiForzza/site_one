@@ -1,9 +1,13 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 import requests
 from .models import Task
 from .forms import TaskForm
 from django.urls import resolve
 from django.contrib.auth.models import User
+from django.contrib.auth import authenticate, login as auth_login
+from forms import UserLoginForm
+from django.http import HttpResponseRedirect
+from django.conf import settings
 
 
 def setup(request):
@@ -19,7 +23,11 @@ def weather():
 
 def index(request):
     tasks = Task.objects.order_by('-id')[:2]
-    return render(request, 'main/main.html', {'response': weather(), 'tasks': tasks, 'current_url': setup(request)})
+    return render(request, 'main/main.html', {
+        'response': weather(),
+        'tasks': tasks,
+        'current_url': setup(request)
+    })
 
 
 def about(request):
@@ -27,19 +35,45 @@ def about(request):
 
 
 def authorization(request):
-    return render(request, 'registration/login.html', {'response': weather()})
+    if request.method == 'POST':
+        form = UserLoginForm(request.POST or None)
+        if form.is_valid():
+            username = User.objects.get(email=form.cleaned_data['email'])
+            password = form.cleaned_data['password']
+            user = authenticate(username=username, password=password)
+            if user:
+                if user.is_active:
+                    auth_login(request, user)
+                    return HttpResponseRedirect(request.GET.get('next',
+                                                                settings.LOGIN_REDIRECT_URL))
+            else:
+                error = 'Invalid username or password.'
+    context = {
+        'response': weather(),
+        'error': error
+    }
+    return render(request, 'registration/login.html', context)
 
 
 def add_news(request):
+    error = ''
     if request.method == 'POST':
         form = TaskForm(request.POST)
         if form.is_valid():
             form.save()
+            return redirect('main:home')
+        else:
+            error = 'Форма была неверной'
 
     form = TaskForm()
     context = {
         'form': form,
+        'error': error,
         'response': weather(),
         'user': User.get_full_name
     }
     return render(request, 'main/add_news.html', context)
+
+
+def testpage(request):
+    return render(request, 'main/testpage.html', {'response': weather()})

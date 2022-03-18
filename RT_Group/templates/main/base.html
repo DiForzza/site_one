@@ -29,9 +29,9 @@
 						<li class="nav-item">
 							<a class="nav-link {% if url_name == 'about' %}active{% endif %}" href="{% url 'main:about' %}" >О нас</a>
 						</li>
-<!--						<li class="nav-item">-->
-<!--							<a class="nav-link {% if url_name == 'authorization' %}active{% endif %}" href="{% url 'main:authorization' %}" tabindex="-1" aria-disabled="true">Вход</a>-->
-<!--						</li>-->
+						<li class="nav-item">
+							<a class="nav-link {% if url_name == 'testpage' %}active{% endif %}" href="{% url 'main:testpage' %}" tabindex="-1" aria-disabled="true">Test Page</a>
+						</li>
 						{% endwith %}
 					</ul>
 					{% if user.is_authenticated %}
