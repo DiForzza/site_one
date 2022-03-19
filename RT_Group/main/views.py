@@ -69,7 +69,7 @@ def add_news(request):
         'response': weather(),
     }
     if request.user.is_authenticated:
-        print('user ' + request.user.get_full_name())
+        print('user ' + request.user.get_full_name()) # get_short_name() || request.user.first_name || request.user.last_name
         return render(request, 'main/add_news.html', context)
     else:
         return redirect('main:home')
