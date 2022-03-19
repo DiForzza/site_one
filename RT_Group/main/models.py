@@ -9,5 +9,5 @@ class Task(models.Model):
         return self.title
 
     class Meta:
-        verbose_name = 'Задача'
-        verbose_name_plural = 'Задачи'
+        verbose_name = 'Новость'
+        verbose_name_plural = 'Новости'

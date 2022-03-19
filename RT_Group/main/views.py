@@ -3,10 +3,6 @@ import requests
 from .models import Task
 from .forms import TaskForm
 from django.urls import resolve
-from django.contrib.auth.models import User
-from django.contrib.auth import authenticate, login as auth_login
-from django.http import HttpResponseRedirect
-from django.conf import settings
 
 
 def setup(request):
@@ -70,7 +66,6 @@ def add_news(request):
         'form': form,
         'error': error,
         'response': weather(),
-        'user': User.get_full_name
     }
     return render(request, 'main/add_news.html', context)
 
