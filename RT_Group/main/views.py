@@ -3,6 +3,7 @@ import requests
 from .models import Task
 from .forms import TaskForm
 from django.urls import resolve
+from django.contrib.auth import authenticate
 
 
 def setup(request):
@@ -67,7 +68,11 @@ def add_news(request):
         'error': error,
         'response': weather(),
     }
-    return render(request, 'main/add_news.html', context)
+    if request.user.is_authenticated:
+        print('user ' + request.user.get_full_name())
+        return render(request, 'main/add_news.html', context)
+    else:
+        return redirect('main:home')
 
 
 def testpage(request):

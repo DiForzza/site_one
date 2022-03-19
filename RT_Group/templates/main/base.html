@@ -34,7 +34,7 @@
 						</li>
 						{% if user.is_authenticated %}
 						<li>
-							<a class="nav-link {% if url_name == 'add_news' %}active{% endif %}" href="{% url 'main:add_news'%}?next={{request.path}}">Добавить новость</a>
+							<a class="nav-link {% if url_name == 'add_news' %}active{% endif %}" href="{% url 'main:add_news'%}?next={{request.path}}" tabindex="-1" aria-disabled="true">Добавить новость</a>
 						</li>
 						{% endif %}
 						{% endwith %}
