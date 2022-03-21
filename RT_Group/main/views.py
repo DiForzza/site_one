@@ -3,11 +3,7 @@ import requests
 from .models import Task
 from .forms import TaskForm
 from django.urls import resolve
-
-
-def setup(request):
-    current_url = resolve(request.path_info).url_name
-    return current_url
+import datetime
 
 
 def weather():
@@ -16,26 +12,32 @@ def weather():
     return response.text
 
 
-def index(request):
+def us_context(request):
     tasks = Task.objects.order_by('-id')[:2]
-    return render(request, 'main/main.html', {
+    current_url = resolve(request.path_info).url_name
+    time = datetime.datetime.now()
+    return {
         'response': weather(),
         'tasks': tasks,
-        'current_url': setup(request)
-    })
+        'current_url': current_url,
+        'time': time
+    }
+
+
+def index(request):
+    return render(request, 'main/main.html', us_context(request))
 
 
 def about(request):
-    return render(request, 'main/about.html', {'response': weather()})
+    return render(request, 'main/about.html', us_context(request))
 
 
 def authorization(request):
-    error = ''
-    context = {
-        'response': weather(),
-        'error': error
-    }
-    return render(request, 'registration/login.html', context)
+    return render(request, 'registration/login.html', us_context(request))
+
+
+def testpage(request):
+    return render(request, 'main/testpage.html', us_context(request))
 
 
 def add_news(request):
@@ -60,7 +62,3 @@ def add_news(request):
         return render(request, 'main/add_news.html', context)
     else:
         return redirect('main:home')
-
-
-def testpage(request):
-    return render(request, 'main/testpage.html', {'response': weather()})
