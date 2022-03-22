@@ -52,12 +52,12 @@
 			</div>
 		</nav>
 	</div>
-		<div class="container">
-			<div class="left-column">
+		<div class="container_custom">
+			<div class="side_column">
 				<h1 >TEXT</h1>
 			</div>
-			<div class="aside" role="alert">
-				<h1 align="center">{{ time|date:"l d F Y"}}</h1>
+			<div class="central_column" role="alert">
+				<h3 align="center">{{ time|date:"l d F Y"}}</h3>
 
 				{% if not current_url == 'testpage' %}
 					{% include "main/carousel.html"  %}
@@ -66,8 +66,8 @@
 				{% block tasks %}{% endblock %}
 				{% block map %}{% endblock %}
 			</div>
-			<div class="right-column">
-				<h1 >TEXT</h1>
+			<div class="side_column">
+				<h1>TEXT</h1>
 			</div>
 		</div>
 </div>

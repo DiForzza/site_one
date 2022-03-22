@@ -15,15 +15,13 @@ def weather():
 def us_context(request):
     error = ''
     form = ''
-    tasks = Task.objects.order_by('-id')[:2]
+    tasks = Task.objects.order_by('-id')[:3]
     current_url = resolve(request.path_info).url_name
     time = datetime.datetime.now()
     if request.path_info == '/':
         title = 'Главная страница'
     elif request.path_info == '/about':
         title = 'О нас'
-    elif request.path_info == '/add_news':
-        title = 'Добавить новость'
     else:
         title = ''
     return {
@@ -63,9 +61,11 @@ def add_news(request):
         else:
             error = 'Форма была неверной'
     form = TaskForm()
+    title = 'Добавить новость'
     context = {
         'form': form,
-        'error': error
+        'error': error,
+        'title': title
     }
     if request.user.is_authenticated:
         # print('user ' + request.user.get_full_name())  # get_short_name() || request.user.first_name ||
