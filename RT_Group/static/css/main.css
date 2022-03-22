@@ -12,3 +12,23 @@ div.layer1 {
     padding: 40px 0;
     text-align: center;
 }
+
+.container {
+    width: 90%; /* Ширина макета */
+    margin: 0 auto; /* Выравнивание по центру */
+}
+
+.left-column {
+    width: 200px;
+    float: left;
+}
+
+.aside {
+    margin: 0 300px 0 200px;
+}
+
+.right-column {
+    width: 200px;
+    float: right;
+}
+

@@ -13,14 +13,27 @@ def weather():
 
 
 def us_context(request):
+    error = ''
+    form = ''
     tasks = Task.objects.order_by('-id')[:2]
     current_url = resolve(request.path_info).url_name
     time = datetime.datetime.now()
+    if request.path_info == '/':
+        title = 'Главная страница'
+    elif request.path_info == '/about':
+        title = 'О нас'
+    elif request.path_info == '/add_news':
+        title = 'Добавить новость'
+    else:
+        title = ''
     return {
         'response': weather(),
         'tasks': tasks,
         'current_url': current_url,
-        'time': time
+        'time': time,
+        'title': title,
+        'error': error,
+        'form': form,
     }
 
 
@@ -49,15 +62,13 @@ def add_news(request):
             return redirect('main:home')
         else:
             error = 'Форма была неверной'
-
     form = TaskForm()
     context = {
         'form': form,
-        'error': error,
-        'response': weather(),
+        'error': error
     }
     if request.user.is_authenticated:
-        print('user ' + request.user.get_full_name())  # get_short_name() || request.user.first_name ||
+        # print('user ' + request.user.get_full_name())  # get_short_name() || request.user.first_name ||
         # request.user.last_name
         return render(request, 'main/add_news.html', context)
     else:
