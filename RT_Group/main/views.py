@@ -13,43 +13,30 @@ def weather():
 
 
 def us_context(request):
-    error = ''
-    form = ''
+    context_list = {}
     tasks = Task.objects.order_by('-id')[:3]
     current_url = resolve(request.path_info).url_name
     time = datetime.datetime.now()
+    context_list['response'] = weather()
+    context_list['current_url'] = current_url
+    context_list['time'] = time
     if request.path_info == '/':
-        title = 'Главная страница'
+        context_list['title'] = 'Главная страница'
+        context_list['tasks'] = tasks
+        return render(request, 'main/main.html', context_list)
     elif request.path_info == '/about':
-        title = 'О нас'
+        context_list['title'] = 'О нас'
+        return render(request, 'main/about.html', context_list)
+    elif request.path_info == '/testpage':
+        context_list['title'] = 'Тестовая страница'
+        return render(request, 'main/testpage.html', context_list)
     else:
-        title = ''
-    return {
-        'response': weather(),
-        'tasks': tasks,
-        'current_url': current_url,
-        'time': time,
-        'title': title,
-        'error': error,
-        'form': form,
-    }
-
-
-def index(request):
-    return render(request, 'main/main.html', us_context(request))
-
-
-def about(request):
-    return render(request, 'main/about.html', us_context(request))
+        context_list['title'] = ''
+    return context_list
 
 
 def authorization(request):
     return render(request, 'registration/login.html', us_context(request))
-
-
-def testpage(request):
-    return render(request, 'main/testpage.html', us_context(request))
-
 
 def add_news(request):
     error = ''
@@ -65,7 +52,8 @@ def add_news(request):
     context = {
         'form': form,
         'error': error,
-        'title': title
+        'title': title,
+        'response': weather()
     }
     if request.user.is_authenticated:
         # print('user ' + request.user.get_full_name())  # get_short_name() || request.user.first_name ||
