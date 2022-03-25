@@ -20,6 +20,7 @@ def us_context(request):
     context_list['response'] = weather()
     context_list['current_url'] = current_url
     context_list['time'] = time
+    print(request.path_info)
     if request.path_info == '/':
         context_list['title'] = 'Главная страница'
         context_list['tasks'] = tasks
@@ -34,9 +35,6 @@ def us_context(request):
         context_list['title'] = ''
     return context_list
 
-
-def authorization(request):
-    return render(request, 'registration/login.html', us_context(request))
 
 def add_news(request):
     error = ''
