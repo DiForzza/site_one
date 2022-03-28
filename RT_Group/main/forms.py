@@ -16,3 +16,4 @@ class TaskForm(ModelForm):
                 'placeholder': 'Введите описание'
             }),
         }
+
