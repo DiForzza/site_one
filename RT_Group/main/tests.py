@@ -1,3 +1,5 @@
 from django.test import TestCase
 
-print(abs(9449))
+nums = [55, 44, 33, 22, 11]
+if all([i < 56 for i in nums]):
+    print('all larger')
