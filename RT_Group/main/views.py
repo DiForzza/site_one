@@ -34,7 +34,7 @@ def us_context(request):
         form = SendEmail()
         context_list['form'] = form
         context_list['title'] = 'Тестовая страница'
-        # send_mail('Тема', 'Тело письма', settings.EMAIL_HOST_USER, ['uit@pm.convex.ru'])
+        # send_mail('Тема', 'Тело письма', settings.EMAIL_HOST_USER, ['@pm..ru'])
         return render(request, 'main/testpage.html', context_list)
     else:
         context_list['title'] = ''
