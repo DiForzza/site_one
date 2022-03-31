@@ -10,5 +10,18 @@ Test page
     <td><h6>2</h6></td>
     <td><h6>3</h6></td>
     <td><h6>4</h6></td>
+    {{ user.get_full_name }}
 </table>
+{% endblock %}
+
+{% block email %}
+    <h1>SEND EMAIL</h1>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.email }}<br>
+        {{ form.text }}<br>
+        <button type="submit" class="btn btn-success">Добавить</button>
+        <span>{{ error }}</span>
+    </form>
+
 {% endblock %}
