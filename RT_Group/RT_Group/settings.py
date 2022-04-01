@@ -14,6 +14,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'main.apps.MainConfig',
+    'channels',
 ]
 
 MIDDLEWARE = [
@@ -48,6 +49,7 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'RT_Group.wsgi.application'
 
+ASGI_APPLICATION = 'RT_Group.asgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/4.0/ref/settings/#databases

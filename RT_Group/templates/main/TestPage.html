@@ -4,24 +4,25 @@
 Test page
 {% endblock %}
 
+<script>
+socket = new WebSocket(“ws://192.168.1.127:80/testpage”);
+socket.onmessage = function(e) {
+
+var data = JSON.parse(e.data);
+document.querySelector(‘#testpage’).innerText = data.timeValue;
+}
+
+</script>
+
 {% block map %}
 <table>
     <td><h6>1</h6></td>
     <td><h6>2</h6></td>
     <td><h6>3</h6></td>
     <td><h6>4</h6></td>
-    {{ user.get_full_name }}
 </table>
-{% endblock %}
 
-{% block email %}
-    <h1>SEND EMAIL</h1>
-    <form method="post">
-        {% csrf_token %}
-        {{ form.email }}<br>
-        {{ form.text }}<br>
-        <button type="submit" class="btn btn-success">Добавить</button>
-        <span>{{ error }}</span>
-    </form>
+<h1 style=”color:blue” id =”testpage”>{{ text }}</h1>
+
 
 {% endblock %}

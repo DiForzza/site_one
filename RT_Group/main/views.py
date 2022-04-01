@@ -1,11 +1,9 @@
 from django.shortcuts import render, redirect
 import requests
 from .models import Task
-from .forms import TaskForm, SendEmail
+from .forms import TaskForm
 from django.urls import resolve
 import datetime
-from django.conf import settings
-from django.core.mail import send_mail
 
 
 def weather():
@@ -31,10 +29,8 @@ def us_context(request):
         context_list['title'] = 'О нас'
         return render(request, 'main/about.html', context_list)
     elif request.path_info == '/testpage':
-        form = SendEmail()
-        context_list['form'] = form
+        context_list['text'] = 'AndreyEX'
         context_list['title'] = 'Тестовая страница'
-        # send_mail('Тема', 'Тело письма', settings.EMAIL_HOST_USER, ['@pm..ru'])
         return render(request, 'main/testpage.html', context_list)
     else:
         context_list['title'] = ''
