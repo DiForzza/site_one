@@ -16,19 +16,3 @@ class TaskForm(ModelForm):
                 'placeholder': 'Введите описание'
             }),
         }
-
-
-class SendEmailForm(ModelForm):
-    class Meta:
-        model = SendEmail
-        fields = ['email', 'text']
-        widgets = {
-            'email': TextInput(attrs={
-                'class': 'form-control',
-                'placeholder': 'Введите email'
-            }),
-            'text': Textarea(attrs={
-                'class': 'form-control',
-                'placeholder': 'Введите сообщение'
-            }),
-        }
