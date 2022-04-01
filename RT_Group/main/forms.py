@@ -1,4 +1,4 @@
-from .models import Task, SendEmail
+from .models import Task
 from django.forms import ModelForm, TextInput, Textarea
 
 
