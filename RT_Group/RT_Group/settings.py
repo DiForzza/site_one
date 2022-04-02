@@ -5,7 +5,8 @@ from pathlib import Path
 BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-29qve08z09i=&oflo=!&xi6az4y32tqc@*241@2@57)+j+&#kh'
 DEBUG = True
-ALLOWED_HOSTS = ['192.168.1.127', '127.0.0.1', 'localhost', '192.168.1.97']
+ALLOWED_HOSTS = ['*']
+CORS_ORIGIN_ALLOW_ALL = True
 INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',

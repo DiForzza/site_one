@@ -28,13 +28,18 @@ def us_context(request):
     elif request.path_info == '/about':
         context_list['title'] = 'О нас'
         return render(request, 'main/about.html', context_list)
-    elif request.path_info == '/testpage':
-        context_list['text'] = 'AndreyEX'
-        context_list['title'] = 'Тестовая страница'
-        return render(request, 'main/testpage.html', context_list)
+    # elif request.path_info == '/testpage':
+    #     context_list['text'] = 'AndreyEX'
+    #     context_list['title'] = 'Тестовая страница'
+    #    return render(request, 'main/testpage.html', context_list)
     else:
         context_list['title'] = ''
     return context_list
+
+
+def testpage(request):
+    print('tessss')
+    return render(request, 'main/testpage.html')
 
 
 def add_news(request):
