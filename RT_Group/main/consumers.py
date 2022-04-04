@@ -16,3 +16,6 @@ class ws_consumer(WebsocketConsumer):
             now = datetime.now()
             self.send(json.dumps({'timeValue': now.strftime("%H:%M:%S")}))
             sleep(1)
+
+    def disconnect(self, code):
+        self.disconnect(code)

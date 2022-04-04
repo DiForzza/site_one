@@ -4,15 +4,6 @@
 Test page
 {% endblock %}
 
-<script>
-var socket = new WebSocket(“ws://192.168.1.97:80/testpage/”);
-
-socket.onmessage = function(event) {
-    var data = JSON.parse(event.data);
-    console.log(data);
-    document.querySelector(‘#testpage’).innerText = data.timeValue;
-}
-</script>
 
 {% block map %}
 <table>
@@ -22,7 +13,9 @@ socket.onmessage = function(event) {
     <td><h6>4</h6></td>
 </table>
 
-<h1 style=”color:blue” id =”testpage”>{{ text }}</h1>
+
+
 
 
 {% endblock %}
+

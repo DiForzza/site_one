@@ -39,7 +39,7 @@ def us_context(request):
 
 def testpage(request):
     print('tessss')
-    return render(request, 'main/testpage.html')
+    return render(request, 'main/testpage.html', context= {'text': "text"})
 
 
 def add_news(request):
