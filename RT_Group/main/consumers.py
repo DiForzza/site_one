@@ -6,10 +6,12 @@ from channels.generic.websocket import WebsocketConsumer
 from datetime import datetime
 # Импортировать модуль sleep
 from time import sleep
+from channels.exceptions import StopConsumer
 
 
 # Определить класс потребителя для отправки данных через
 class ws_consumer(WebsocketConsumer):
+
     def connect(self):
         self.accept()
         while True:
@@ -17,5 +19,7 @@ class ws_consumer(WebsocketConsumer):
             self.send(json.dumps({'timeValue': now.strftime("%H:%M:%S")}))
             sleep(1)
 
-    def disconnect(self, code):
-        self.disconnect(code)
+    def disconnect(self, timer_run):
+        print('!!!Disconnect!!!')
+        self.close()
+        raise StopConsumer()

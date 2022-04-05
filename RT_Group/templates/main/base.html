@@ -71,7 +71,7 @@
 				<p>Задача организации, в особенности же укрепление и развитие структуры обеспечивает широкому кругу (специалистов) участие в формировании новых предложений. Разнообразный и богатый опыт реализация намеченных плановых заданий требуют от нас анализа систем массового участия. Значимость этих проблем настолько очевидна, что сложившаяся структура организации представляет собой интересный эксперимент проверки форм развития. Задача организации, в особенности же постоянный количественный рост и сфера нашей активности играет важную роль в формировании новых предложений. Значимость этих проблем настолько очевидна, что начало повседневной работы по формированию позиции обеспечивает широкому кругу (специалистов) участие в формировании системы обучения кадров, соответствует насущным потребностям.</p>
 			</div>
 		</div>
-	    <div id =”testpage”> {{ text }} </div>
+
 </div>
 	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
 	 crossorigin="anonymous"></script>
@@ -79,17 +79,6 @@
 	 crossorigin="anonymous"></script>
 	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js" integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T"
 	 crossorigin="anonymous"></script>
-	<script>
-	var socket = new WebSocket('ws://localhost:80/testpage/');
-
-	socket.onmessage = function(event) {
-		var data = JSON.parse(event.data);
-		console.log(data);
-		console.log(document.querySelector("#testpage"));
-		console.log(document.querySelector("#testpage").innerText);
-		document.querySelector("#testpage").innerText = data.timeValue;
-	}
-	</script>
 </body>
 </html>
 
