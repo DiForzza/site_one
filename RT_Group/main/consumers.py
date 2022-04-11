@@ -10,7 +10,6 @@ class ws_consumer(WebsocketConsumer):
 
     def __init__(self, *args, **kwargs):
         super().__init__(args, kwargs)
-        self._start_time = time.perf_counter()
 
     def connect(self):
         self.accept()
@@ -28,13 +27,11 @@ class ws_consumer(WebsocketConsumer):
         print('!!!receive!!!')
 
     def timer(self):
-        start_time = True
-        while start_time:
+        self.timer_start()
+
+    def timer_start(self):
+        while True:
             now = datetime.now()
             self.send(json.dumps({'timeValue': now.strftime("%H:%M:%S")}))
             sleep(1)
-            elapsed_time = time.perf_counter() - self._start_time
-            print(elapsed_time)
-            if elapsed_time > 20:
-                start_time = False
-                print('timer stopped')
+

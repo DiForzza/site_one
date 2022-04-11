@@ -20,13 +20,12 @@
 
 <script>
 document.getElementById("test").innerText = "ITS WORK2";
-
 socket = new WebSocket('ws://localhost:80/testpage/');
-socket.onmessage = function(events) {
 
-var data = JSON.parse(events.data);
-console.log(data)
-document.getElementById("main").innerText = data.timeValue;
+socket.onmessage = function(events) {
+    var data = JSON.parse(events.data);
+    console.log(data)
+    document.getElementById("main").innerText = data.timeValue;
 }
 </script>
 
