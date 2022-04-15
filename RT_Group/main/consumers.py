@@ -2,7 +2,6 @@ import json
 from channels.generic.websocket import WebsocketConsumer
 from datetime import datetime
 from time import sleep
-import time
 from channels.exceptions import StopConsumer
 
 
@@ -12,19 +11,19 @@ class ws_consumer(WebsocketConsumer):
         super().__init__(args, kwargs)
 
     def connect(self):
+        print('!!!Connected!!!')
         self.accept()
-        self.timer()
+        # self.timer()
 
     def disconnect(self, close_code):
         print('!!!Disconnect!!!')
         self.close()
         raise StopConsumer()
 
-    def render(self):
-        print('!!!render!!!')
-
     def receive(self, text_data=None, bytes_data=None):
-        print('!!!receive!!!')
+        text_data_json = json.loads(text_data)
+        message = text_data_json['message']
+        print(message, text_data, bytes_data)
 
     def timer(self):
         self.timer_start()
@@ -34,4 +33,3 @@ class ws_consumer(WebsocketConsumer):
             now = datetime.now()
             self.send(json.dumps({'timeValue': now.strftime("%H:%M:%S")}))
             sleep(1)
-
