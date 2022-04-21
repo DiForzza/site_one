@@ -42,6 +42,12 @@ def testpage(request):
     return render(request, 'main/testpage.html', context= {'text': 'NOT WORK', 'title': 'Тестовая страница'})
 
 
+async def websocket_view(socket):
+    await socket.accept()
+    await socket.send_text('hello')
+    await socket.close()
+
+
 def add_news(request):
     error = ''
     if request.method == 'POST':

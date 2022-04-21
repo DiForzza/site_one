@@ -10,17 +10,17 @@ class ws_consumer(WebsocketConsumer):
     def __init__(self, *args, **kwargs):
         super().__init__(args, kwargs)
 
-    def connect(self):
+    def websocket_connect(self, message):
         print('!!!Connected!!!')
         self.accept()
         # self.timer()
 
-    def disconnect(self, close_code):
+    def websocket_disconnect(self, close_code):
         print('!!!Disconnect!!!')
         self.close()
         raise StopConsumer()
 
-    def receive(self, text_data=None, bytes_data=None):
+    def websocket_receive(self, text_data=None, bytes_data=None):
         text_data_json = json.loads(text_data)
         message = text_data_json['message']
         print(message, text_data, bytes_data)

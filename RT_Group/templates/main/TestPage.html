@@ -25,7 +25,7 @@ let socket = new WebSocket('ws://localhost:80/testpage/');
 socket.onopen = function(e) {
   alert("[open] Соединение установлено");
   alert("Отправляем данные на сервер");
-  socket.send("Меня зовут Джон");
+  socket.emit('eventServer', { data: 'Hello Server' });
 };
 
 socket.onmessage = function(events) {
