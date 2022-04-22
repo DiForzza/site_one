@@ -20,12 +20,16 @@
 
 <script>
 document.getElementById("test").innerText = "ITS WORK2";
-let socket = new WebSocket('ws://localhost:80/testpage/');
+let socket = new WebSocket("ws://localhost:80/testpage/");
 
 socket.onopen = function(e) {
   alert("[open] Соединение установлено");
   alert("Отправляем данные на сервер");
-  socket.emit('eventServer', { data: 'Hello Server' });
+    let timer = null;
+    timer = setInterval(() => {
+        socket.send("hello");
+        console.log('hello')
+    }, 1000);
 };
 
 socket.onmessage = function(events) {

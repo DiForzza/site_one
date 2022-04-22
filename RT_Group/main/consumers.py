@@ -21,9 +21,7 @@ class ws_consumer(WebsocketConsumer):
         raise StopConsumer()
 
     def websocket_receive(self, text_data=None, bytes_data=None):
-        text_data_json = json.loads(text_data)
-        message = text_data_json['message']
-        print(message, text_data, bytes_data)
+        print('!!received!!!', text_data['text'])
 
     def timer(self):
         self.timer_start()
