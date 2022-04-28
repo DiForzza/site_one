@@ -17,6 +17,22 @@
 <div id="test"> fghfgh </div>
 <div id="main"> ьффффф </div>
 
+{% if message  %}
+    {% for i in message %}
+        <div class="alert alert-warning mt-2">
+            <h3>{{ i.text }}</h3>
+        </div>
+    {% endfor %}
+{% else %}
+    <p>Нет сообщений</p>
+{% endif %}
+
+<form method="post">
+    {% csrf_token %}
+    {{ form.text }}<br>
+    <button type="submit" class="btn btn-success">Добавить</button>
+    <span>{{ error }}</span>
+</form>
 
 <script>
 document.getElementById("test").innerText = "ITS WORK2";
@@ -29,7 +45,7 @@ socket.onopen = function(e) {
     timer = setInterval(() => {
         socket.send(timer);
         console.log('hello')
-    }, 1000);
+    }, 10000);
 };
 
 socket.onmessage = function(events) {

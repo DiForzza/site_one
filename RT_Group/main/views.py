@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 import requests
-from .models import Task
-from .forms import TaskForm
+from .models import Task, Test
+from .forms import TaskForm, TestForm
 from django.urls import resolve
 import datetime
 
@@ -38,8 +38,19 @@ def us_context(request):
 
 
 def testpage(request):
-    print('tessss')
-    return render(request, 'main/testpage.html', context= {'text': 'NOT WORK', 'title': 'Тестовая страница'})
+    error = ''
+    if request.method == 'POST':
+        form = TestForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('main:home')
+        else:
+            error = 'Форма была неверной'
+    form = TestForm()
+    servtext = Test.objects.order_by('-id')[:3]
+    print(servtext)
+    return render(request, 'main/testpage.html',
+                  context={'form': form, 'message': servtext, 'title': 'Тестовая страница', 'error': error})
 
 
 async def websocket_view(socket):

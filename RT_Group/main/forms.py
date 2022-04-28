@@ -1,4 +1,4 @@
-from .models import Task
+from .models import Task, Test
 from django.forms import ModelForm, TextInput, Textarea
 
 
@@ -14,5 +14,17 @@ class TaskForm(ModelForm):
             'task': Textarea(attrs={
                 'class': 'form-control',
                 'placeholder': 'Введите описание'
+            }),
+        }
+
+
+class TestForm(ModelForm):
+    class Meta:
+        model = Test
+        fields = ['text']
+        widgets = {
+            'text': Textarea(attrs={
+                'class': 'form-control',
+                'placeholder': 'Введите текст для сервера (не более 50 символов)'
             }),
         }

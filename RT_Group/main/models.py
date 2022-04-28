@@ -13,3 +13,14 @@ class Task(models.Model):
     class Meta:
         verbose_name = 'Новость'
         verbose_name_plural = 'Новости'
+
+
+class Test(models.Model):
+    text = models.TextField("Описание")
+
+    def __str__(self):
+        return self.text
+
+    class Meta:
+        verbose_name = 'Сообщение сервера'
+        verbose_name_plural = 'Сообщения сервера'
