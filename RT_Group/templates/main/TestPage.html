@@ -23,11 +23,11 @@ document.getElementById("test").innerText = "ITS WORK2";
 let socket = new WebSocket("ws://localhost:80/testpage/");
 
 socket.onopen = function(e) {
-  alert("[open] Соединение установлено");
-  alert("Отправляем данные на сервер");
+<!--  alert("[open] Соединение установлено");-->
+<!--  alert("Отправляем данные на сервер");-->
     let timer = null;
     timer = setInterval(() => {
-        socket.send("hello");
+        socket.send(timer);
         console.log('hello')
     }, 1000);
 };
