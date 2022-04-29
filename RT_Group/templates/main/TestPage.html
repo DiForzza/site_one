@@ -38,20 +38,21 @@
 document.getElementById("test").innerText = "ITS WORK2";
 let socket = new WebSocket("ws://localhost:80/testpage/");
 
-socket.onopen = function(e) {
+socket.onopen = function(events) {
 <!--  alert("[open] Соединение установлено");-->
 <!--  alert("Отправляем данные на сервер");-->
     let timer = null;
+
     timer = setInterval(() => {
         socket.send(timer);
-        console.log('hello')
-    }, 10000);
+<!--        console.log('hello')-->
+    }, 1000);
 };
 
 socket.onmessage = function(events) {
     var data = JSON.parse(events.data);
-    console.log(data)
-    document.getElementById("main").innerText = data.timeValue;
+<!--    console.log(data)-->
+    document.getElementById("main").innerText = data.random;
 }
 </script>
 

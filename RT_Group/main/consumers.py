@@ -3,6 +3,7 @@ from channels.generic.websocket import WebsocketConsumer
 from datetime import datetime
 from time import sleep
 from channels.exceptions import StopConsumer
+import random
 
 
 class ws_consumer(WebsocketConsumer):
@@ -21,6 +22,8 @@ class ws_consumer(WebsocketConsumer):
         raise StopConsumer()
 
     def websocket_receive(self, text_data=None, bytes_data=None):
+        self.send(json.dumps({'random': random.randint(10, 20)}))
+        sleep(1)
         print('!!received!!!', text_data['text'])
 
     def timer(self):
