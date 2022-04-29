@@ -43,7 +43,7 @@ def testpage(request):
         form = TestForm(request.POST)
         if form.is_valid():
             form.save()
-            return redirect('main:home')
+            #return redirect('main:home')
         else:
             error = 'Форма была неверной'
     form = TestForm()
@@ -51,12 +51,6 @@ def testpage(request):
     print(servtext)
     return render(request, 'main/testpage.html',
                   context={'form': form, 'message': servtext, 'title': 'Тестовая страница', 'error': error})
-
-
-async def websocket_view(socket):
-    await socket.accept()
-    await socket.send_text('hello')
-    await socket.close()
 
 
 def add_news(request):

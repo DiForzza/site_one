@@ -4,6 +4,9 @@ from datetime import datetime
 from time import sleep
 from channels.exceptions import StopConsumer
 import random
+from .models import Task, Test
+from .forms import TaskForm, TestForm
+from django.forms.models import model_to_dict
 
 
 class ws_consumer(WebsocketConsumer):
@@ -22,7 +25,13 @@ class ws_consumer(WebsocketConsumer):
         raise StopConsumer()
 
     def websocket_receive(self, text_data=None, bytes_data=None):
-        self.send(json.dumps({'random': random.randint(10, 20)}))
+        testlist = Test.objects.all()
+        for k in testlist:
+            k = model_to_dict(k)
+            k = k['text']
+            print(k)
+       # print(testlist)
+            self.send(json.dumps({'random': k}))
         sleep(1)
         print('!!received!!!', text_data['text'])
 
