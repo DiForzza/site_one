@@ -16,6 +16,7 @@
 
 <div id="test"> fghfgh </div>
 <div id="main"> ьффффф </div>
+<h1> {{data}} </h1>
 
 {% if message  %}
     {% for i in message %}
@@ -51,7 +52,7 @@ socket.onopen = function(events) {
 
 socket.onmessage = function(events) {
     var data = JSON.parse(events.data);
-<!--    console.log(data)-->
+    console.log(data.random)
     document.getElementById("main").innerText = data.random;
 }
 </script>

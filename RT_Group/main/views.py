@@ -48,7 +48,7 @@ def testpage(request):
             error = 'Форма была неверной'
     form = TestForm()
     servtext = Test.objects.order_by('-id')[:3]
-    print(servtext)
+#    print(servtext)
     return render(request, 'main/testpage.html',
                   context={'form': form, 'message': servtext, 'title': 'Тестовая страница', 'error': error})
 
