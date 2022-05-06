@@ -14,7 +14,8 @@ class ws_consumer(WebsocketConsumer):
     def __init__(self, *args, **kwargs):
         super().__init__(args, kwargs)
 
-    def websocket_connect(self, message):
+    def connect(self):
+        print(self.scope['url_route'])
         print('!!!Connected!!!')
         self.accept()
         # self.timer()
@@ -25,11 +26,13 @@ class ws_consumer(WebsocketConsumer):
         raise StopConsumer()
 
     def websocket_receive(self, text_data=None, bytes_data=None):
-        testlist = Test.objects.all()
-        for k in testlist:
+        print(list(Test.objects.all()))
+        new_spisok = {}
+        for k in Test.objects.all():
             k = model_to_dict(k)
-            k = k['text']
             print(k)
+            k = k['text']
+
        # print(testlist)
             self.send(json.dumps({'random': k}))
         sleep(1)

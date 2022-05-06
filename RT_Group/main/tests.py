@@ -1,8 +1,9 @@
-from itertools import product, permutations
+dict_sample = {
+  "Company": "Toyota", 
+  "model": "Premio", 
+  "year": 2012 
+} 
 
+dict_sample["year"] = 2014 
 
-def factorial():
-    list_1 = {1: 'smile', 2: 'escape', 3: '123'}
-    print(list_1())
-
-factorial()
+print(dict_sample)
