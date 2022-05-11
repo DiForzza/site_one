@@ -7,8 +7,11 @@ from django.forms.models import model_to_dict
 
 
 print(Test.objects.all())
+new_dict = {}
 for k in Test.objects.all():
-  k = model_to_dict(k)
-  print(k)
-  k = k['text']
+    k = model_to_dict(k)
+    key = k['id']
+    value = k['text']
+    new_dict[key] = value
 
+print(new_dict)

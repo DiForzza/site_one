@@ -24,15 +24,16 @@ class ws_consumer(WebsocketConsumer):
         raise StopConsumer()
 
     def websocket_receive(self, text_data=None, bytes_data=None):
-        print(Test.objects.all())
-        new_spisok = {}
+        # print(Test.objects.all())
+        new_dict = {}
         for k in Test.objects.all():
             k = model_to_dict(k)
-            print(k)
-            k = k['text']
+            key = k['id']
+            value = k['text']
+            new_dict[key] = value
 
        # print(testlist)
-            self.send(json.dumps({'random': k}))
+        self.send(json.dumps({'random': new_dict}))
         sleep(1)
         print('!!received!!!', text_data['text'])
 
