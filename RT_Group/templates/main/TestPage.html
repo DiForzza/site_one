@@ -53,12 +53,10 @@ socket.onopen = function(events) {
 socket.onmessage = function(events) {
     var data = JSON.parse(events.data);
     console.log(data.random);
-    for (let data of arr.entries()) {
-        console.log(data.random[0]);
-        console.log(data.random[1]);
-        console.log(`Ключ = ${pair[0]}, значение = ${pair[1]}`);
+    for(var key in data.random){
+        console.log("key: " + key + " ,value: " + data.random[key]);
     }
-    document.getElementById("main").innerText = data.random;
+    document.getElementById("main").innerText = data.random.Count;
 }
 </script>
 
