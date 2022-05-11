@@ -3,9 +3,7 @@ from channels.generic.websocket import WebsocketConsumer
 from datetime import datetime
 from time import sleep
 from channels.exceptions import StopConsumer
-import random
 from .models import Task, Test
-from .forms import TaskForm, TestForm
 from django.forms.models import model_to_dict
 
 
@@ -26,7 +24,7 @@ class ws_consumer(WebsocketConsumer):
         raise StopConsumer()
 
     def websocket_receive(self, text_data=None, bytes_data=None):
-        print(list(Test.objects.all()))
+        print(Test.objects.all())
         new_spisok = {}
         for k in Test.objects.all():
             k = model_to_dict(k)
