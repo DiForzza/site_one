@@ -25,6 +25,10 @@ class ws_consumer(WebsocketConsumer):
 
     def websocket_receive(self, text_data=None, bytes_data=None):
         # print(Test.objects.all())
+        if len(Test.objects.all()) > 10:
+            Test.objects.filter(id=list(Test.objects.values_list('id', flat=True)[:1]))
+            #delete = Test.objects.all()[:1]
+            #delete.delete()
         new_dict = {}
         for k in Test.objects.all():
             k = model_to_dict(k)
@@ -35,7 +39,7 @@ class ws_consumer(WebsocketConsumer):
        # print(testlist)
         self.send(json.dumps({'random': new_dict}))
         sleep(1)
-        print('!!received!!!', text_data['text'])
+        print('!!received!!!', len(Test.objects.all()))
 
     def timer(self):
         self.timer_start()

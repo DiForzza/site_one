@@ -52,11 +52,13 @@ socket.onopen = function(events) {
 
 socket.onmessage = function(events) {
     var data = JSON.parse(events.data);
-    console.log(data.random);
-    for(var key in data.random){
-        console.log("key: " + key + " ,value: " + data.random[key]);
+    var dict = data.random;
+    console.log(dict);
+    dict.sort();
+    for(var key in dict){
+        console.log("key: " + key + " ,value: " + dict[key]);
     }
-    document.getElementById("main").innerText = data.random.Count;
+    document.getElementById("main").innerText = dict.Count;
 }
 </script>
 
