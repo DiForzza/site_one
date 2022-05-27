@@ -5,6 +5,15 @@ from time import sleep
 from channels.exceptions import StopConsumer
 from .models import Task, Test
 from django.forms.models import model_to_dict
+from django.db import connection
+from django.core.management.color import no_style
+
+
+def sql_sort():
+    sequence_sql = connection.ops.sequence_reset_sql(no_style(), [Test])
+    with connection.cursor() as cursor:
+        for sql in sequence_sql:
+            cursor.execute(sql)
 
 
 class ws_consumer(WebsocketConsumer):
@@ -25,8 +34,13 @@ class ws_consumer(WebsocketConsumer):
 
     def websocket_receive(self, text_data=None, bytes_data=None):
         # print(Test.objects.all())
+
         if len(Test.objects.all()) > 10:
-            Test.objects.filter(id=list(Test.objects.values_list('id', flat=True)[:1]))
+            print(Test.objects.filter(id=0))
+            delete = Test.objects.all()[0]
+            delete.delete()
+            sql_sort()
+            #Test.objects.filter(id=list(Test.objects.values_list('id', flat=True)[:1]))
             #delete = Test.objects.all()[:1]
             #delete.delete()
         new_dict = {}

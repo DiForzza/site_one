@@ -6,5 +6,5 @@ from main.models import Test
 from django.forms.models import model_to_dict
 
 
-
-print(Test.objects.filter(id=list(Test.objects.all()[:1])))
+k = model_to_dict(Test.objects.all())
+print(k)

@@ -54,11 +54,12 @@ socket.onmessage = function(events) {
     var data = JSON.parse(events.data);
     var dict = data.random;
     console.log(dict);
-    dict.sort();
     for(var key in dict){
         console.log("key: " + key + " ,value: " + dict[key]);
     }
-    document.getElementById("main").innerText = dict.Count;
+    console.log(dict.length)
+    var lastElement = dict[dict.length - 1];
+    document.getElementById("main").innerText = lastElement;
 }
 </script>
 
