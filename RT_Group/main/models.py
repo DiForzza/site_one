@@ -17,6 +17,7 @@ class Task(models.Model):
 
 class Test(models.Model):
     text = models.TextField("Описание")
+    cat = models.ForeignKey('Category', on_delete=models.CASCADE, null=True)
 
     def __str__(self):
         return self.text
@@ -24,3 +25,9 @@ class Test(models.Model):
     class Meta:
         verbose_name = 'Сообщение сервера'
         verbose_name_plural = 'Сообщения сервера'
+
+class Category(models.Model):
+    name = models.CharField(max_length=100, db_index=True)
+
+    def __str__(self):
+        return self.name

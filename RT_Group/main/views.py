@@ -1,5 +1,6 @@
 from django.shortcuts import render, redirect
 import requests
+
 from .models import Task, Test
 from .forms import TaskForm, TestForm
 from django.urls import resolve
@@ -43,12 +44,12 @@ def testpage(request):
         form = TestForm(request.POST)
         if form.is_valid():
             form.save()
-            #return redirect('main:home')
+            # return redirect('main:home')
         else:
             error = 'Форма была неверной'
     form = TestForm()
     servtext = Test.objects.order_by('-id')[:3]
-#    print(servtext)
+    #    print(servtext)
     return render(request, 'main/testpage.html',
                   context={'form': form, 'message': servtext, 'title': 'Тестовая страница', 'error': error})
 
@@ -76,3 +77,17 @@ def add_news(request):
         return render(request, 'main/add_news.html', context)
     else:
         return redirect('main:home')
+
+
+from rest_framework import generics
+from .serializer import TestSerializer
+from rest_framework.views import APIView
+from rest_framework.response import Response
+
+class TestAPIView(APIView):
+    def get(self, request):
+        return Response({'test': 'cat_id'})
+
+# class TestAPIView(generics.ListAPIView):
+#     queryset = Test.objects.all()
+#     serializer_class = TestSerializer
