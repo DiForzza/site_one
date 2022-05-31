@@ -57,9 +57,12 @@ socket.onmessage = function(events) {
     for(var key in dict){
         console.log("key: " + key + " ,value: " + dict[key]);
     }
-    console.log(dict.length)
-    var lastElement = dict[dict.length - 1];
-    document.getElementById("main").innerText = lastElement;
+    var keys = Object.keys(dict);
+    console.log('dict contains ' + keys.length + ' keys: '+  keys);
+
+    console.log(Object.keys(dict).length - 1)
+    var lastElement = (Object.keys(dict).length - 1);
+    document.getElementById("main").innerText = dict[11];
 }
 </script>
 
