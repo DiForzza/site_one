@@ -15,18 +15,20 @@
 <body>
 
 <div id="test"> fghfgh </div>
-<div id="main"> ьффффф </div>
+<div id="main1"> ьффффф </div>
+<div id="main2"> ьффффф </div>
+<div id="main3"> ьффффф </div>
 <h1> {{data}} </h1>
 
-{% if message  %}
-    {% for i in message %}
-        <div class="alert alert-warning mt-2">
-            <h3>{{ i.text }}</h3>
-        </div>
-    {% endfor %}
-{% else %}
-    <p>Нет сообщений</p>
-{% endif %}
+<!--{% if message  %}-->
+<!--    {% for i in message %}-->
+<!--        <div class="alert alert-warning mt-2">-->
+<!--            <h3>{{ i.text }}</h3>-->
+<!--        </div>-->
+<!--    {% endfor %}-->
+<!--{% else %}-->
+<!--    <p>Нет сообщений</p>-->
+<!--{% endif %}-->
 
 <form method="post">
     {% csrf_token %}
@@ -54,15 +56,17 @@ socket.onmessage = function(events) {
     var data = JSON.parse(events.data);
     var dict = data.random;
     console.log(dict);
-    for(var key in dict){
-        console.log("key: " + key + " ,value: " + dict[key]);
-    }
+<!--    for(var key in dict){-->
+<!--        console.log("key: " + key + " ,value: " + dict[key]);-->
+<!--    }-->
     var keys = Object.keys(dict);
+    var lastMessage1 = keys[9]
+    var lastMessage2 = keys[8]
+    var lastMessage3 = keys[7]
     console.log('dict contains ' + keys.length + ' keys: '+  keys);
-
-    console.log(Object.keys(dict).length - 1)
-    var lastElement = (Object.keys(dict).length - 1);
-    document.getElementById("main").innerText = dict[11];
+    document.getElementById("main1").innerText = dict[lastMessage1];
+    document.getElementById("main2").innerText = dict[lastMessage2];
+    document.getElementById("main3").innerText = dict[lastMessage3];
 }
 </script>
 
