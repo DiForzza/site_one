@@ -34,7 +34,7 @@ class ws_consumer(WebsocketConsumer):
 
     def websocket_receive(self, text_data=None, bytes_data=None):
         # print(Test.objects.all())
-
+        print(text_data)
         if len(Test.objects.all()) > 10:
             print(Test.objects.filter(id=0))
             delete = Test.objects.all()[0]

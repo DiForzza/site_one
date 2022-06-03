@@ -31,15 +31,18 @@
 <!--{% endif %}-->
 
 <form method="post">
-    {% csrf_token %}
-    {{ form.text }}<br>
-    <button type="submit" class="btn btn-success">Добавить</button>
+<!--    {% csrf_token %}-->
+<!--    {{ form.text }}<br>-->
+<!--    <button type="submit" id="chat-message-submit"> Добавить</button>-->
+    <input id="chat-message-input" type="text" size="100"><br>
+    <input id="chat-message-submit" type="button" value="Send">
     <span>{{ error }}</span>
 </form>
 
 <script>
 document.getElementById("test").innerText = "ITS WORK2";
 let socket = new WebSocket("ws://localhost:80/testpage/");
+
 
 socket.onopen = function(events) {
 <!--  alert("[open] Соединение установлено");-->
@@ -68,6 +71,24 @@ socket.onmessage = function(events) {
     document.getElementById("main2").innerText = dict[lastMessage2];
     document.getElementById("main3").innerText = dict[lastMessage3];
 }
+
+document.querySelector('#chat-message-input').focus();
+document.querySelector('#chat-message-input').onkeyup = function(e) {
+    if (e.keyCode === 13) {  // enter, return
+        document.querySelector('#chat-message-submit').click();
+    }
+};
+
+document.querySelector('#chat-message-submit').onclick = function(e) {
+    const messageInputDom = document.querySelector('#chat-message-input');
+    const message = messageInputDom.value;
+    socket.send(JSON.stringify({
+        'message': message
+    }));
+    console.log(message);
+    messageInputDom.value = '';
+};
+
 </script>
 
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
