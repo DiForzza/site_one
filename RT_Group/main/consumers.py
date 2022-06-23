@@ -7,6 +7,7 @@ from .models import Task, Test
 from django.forms.models import model_to_dict
 from django.db import connection
 from django.core.management.color import no_style
+from .forms import TestForm
 
 
 def sql_sort():
@@ -34,7 +35,16 @@ class ws_consumer(WebsocketConsumer):
 
     def websocket_receive(self, text_data=None, bytes_data=None):
         # print(Test.objects.all())
-        print(text_data)
+        received_text = text_data['text']
+        if 'message' in received_text:
+            dict_from_received_message = received_text.replace('{', '')
+            dict_from_received_message = dict_from_received_message.replace('"', '')
+            dict_from_received_message = dict_from_received_message.replace('}', '')
+            dict_from_received_message = dict_from_received_message.split(':')
+            form = TestForm(dict_from_received_message)
+            if form.is_valid():
+                form.save()
+            #print('message: ', dict_from_received_message[1])
         if len(Test.objects.all()) > 10:
             print(Test.objects.filter(id=0))
             delete = Test.objects.all()[0]
@@ -53,7 +63,7 @@ class ws_consumer(WebsocketConsumer):
        # print(testlist)
         self.send(json.dumps({'random': new_dict}))
         sleep(1)
-        print('!!received!!!', len(Test.objects.all()))
+        #print('!!received!!!', len(Test.objects.all()))
 
     def timer(self):
         self.timer_start()
